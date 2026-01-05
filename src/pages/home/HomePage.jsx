@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../../utils/api';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 // import { Helmet } from "react-helmet-async";
@@ -23,11 +24,12 @@ export function HomePage({ cart, loadCart }) {
         setProducts([]);
 
         const urlPath = search
-          ? `/api/products?search=${search}`
-          : '/api/products';
+          ? `${API_BASE_URL}/api/products?search=${search}`
+          : `${API_BASE_URL}/api/products`;
 
         const response = await axios.get(urlPath);
-        setProducts(response.data);
+        console.log('PRODUCTS RESPONSE: ', response.data);
+        setProducts(Array.isArray(response.data) ? response.data : []);
       } catch {
         setError('Failed to load products. Please try again later.');
       } finally {

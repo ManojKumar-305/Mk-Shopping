@@ -3,7 +3,7 @@ import { DeliveryOptions } from './DeliveryOptions';
 import { CartItemDetails } from './CartItemsDetails';
 
 export function OrderSummary({ cart = [], deliveryOptions = [], loadCart}) {
-  if (!cart || cart.length === 0) {
+  if (!Array.isArray(cart) || cart.length === 0) {
     return <div className="order-summary">Your cart is empty.</div>;
   }
 

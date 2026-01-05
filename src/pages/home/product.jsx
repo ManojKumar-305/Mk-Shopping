@@ -3,37 +3,51 @@ import { useState } from 'react';
 import { StarRating } from '../../components/star-rating';
 import { formatMoney } from '../../utils/money';
 import CheckmarkIcon from '../../assets/images/icons/checkmark.png';
+import { API_BASE_URL } from '../../utils/api';
 
 export function Product({ product, loadCart }) {
+  
   const [quantity, setQuantity] = useState(1);
   const [showAddedMessage, setShowAddedMessage] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+
+  if (!product) return null;
 
   const addToCart = async () => {
-    await axios.post('/api/cart-items', {
-      productId: product.id,
-      quantity
-    });
-    await loadCart();
+    try {
+      setIsAdding(true);
 
-    setShowAddedMessage(true);
+      await axios.post(`${API_BASE_URL}/api/cart-items`, {
+        productId: product.id,
+        quantity
+      });
 
-    setTimeout(() => {
-      setShowAddedMessage(false);
-    }, 2000)
+      if (typeof loadCart === 'function') {
+        await loadCart();
+      }
+
+      setShowAddedMessage(true);
+      setTimeout(() => setShowAddedMessage(false), 2000);
+
+    } catch (error) {
+      console.error('Add to cart failed:', error);
+      alert('Failed to add product to cart');
+    } finally {
+      // ✅ THIS FIXES THE RED UNDERLINE
+      setIsAdding(false);
+    }
   };
 
-  const selectQuantity = (event) => {
-    const quantitySelected = Number(event.target.value);
-    setQuantity(quantitySelected);
-  }
-
   return (
-    <div className="product-container"
-      data-testid="product-container">
+    <div className="product-container" data-testid="product-container">
+
       <div className="product-image-container">
-        <img className="product-image"
+        <img
+          className="product-image"
           data-testid="product-image"
-          src={product.image} />
+          src={`${API_BASE_URL}/${product.image}`}
+          alt={product.name}
+        />
       </div>
 
       <div className="product-name limit-text-to-2-lines">
@@ -42,59 +56,51 @@ export function Product({ product, loadCart }) {
 
       <div className="product-rating-container">
         <StarRating
-          rating={product.rating.stars * 10}
+          rating={(product.rating?.stars ?? 0) * 10}
           size={18}
         />
-
         <div className="product-rating-count link-primary">
-          {product.rating.count}
+          {product.rating?.count ?? 0}
         </div>
       </div>
-
-
-      {/* <div className="product-rating-container">
-        <img className="product-rating-stars"
-          data-testid="product-rating-stars-image"
-          src={`images/ratings/rating-${product.rating.stars * 10}.png`} alt={`Rating ${product.rating.stars}`} />
-        <div className="product-rating-count link-primary">
-          {product.rating.count}
-        </div>
-      </div> */}
 
       <div className="product-price">
         {formatMoney(product.priceCents)}
       </div>
 
       <div className="product-quantity-container">
-        <select value={quantity} onChange={selectQuantity}
-          data-testid={"product-quantity-selector"}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
+        <select
+          value={quantity}
+          onChange={(e) => setQuantity(Number(e.target.value))}
+          data-testid="product-quantity-selector"
+        >
+          {[...Array(10)].map((_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart" style={{
-        opacity: showAddedMessage ? 1 : 0,
-      }}>
+      <div
+        className="added-to-cart"
+        style={{ opacity: showAddedMessage ? 1 : 0 }}
+      >
         <img src={CheckmarkIcon} alt="Added" />
         Added
       </div>
 
-      <button className="add-to-cart-button button-primary"
+      <button
+        className="add-to-cart-button button-primary"
         data-testid="add-to-cart-button"
-        onClick={addToCart}>
-        Add to Cart
+        onClick={addToCart}
+        disabled={isAdding}
+      >
+        {isAdding ? 'Adding…' : 'Add to Cart'}
       </button>
+
     </div>
   );
 }

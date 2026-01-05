@@ -23,7 +23,7 @@ export function Header({ cart = [] }) {
 
   let totalQuantity = 0;
 
-  cart.forEach((cartItem) => {
+  Array.isArray(cart) && cart.forEach((cartItem) => {
       totalQuantity += cartItem.quantity;
   });
 
