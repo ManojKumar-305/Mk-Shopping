@@ -1,16 +1,20 @@
-import axios from "axios";
+import api from '../../utils/axios';;
 import { formatMoney } from "../../utils/money";
 import { useNavigate } from 'react-router-dom';
 
-export function PaymentSummary({ paymentSummary, loadCart }) {
+export function PaymentSummary({ paymentSummary, loadCart, isLoading }) {
   const navigate = useNavigate();
 
-  if (!paymentSummary) {
+  if (isLoading) {
     return <div className="payment-summary">Calculating payment...</div>;
   }
 
+  if (!paymentSummary) {
+    return <div className="payment-summary">Failed to load payment summary.</div>;
+  }
+
   const createOrder = async () => {
-    await axios.post('/api/orders');
+    await api.post('/api/orders');
     await loadCart();
     navigate('/orders')
   };

@@ -1,5 +1,4 @@
-import axios  from 'axios';
-import { API_BASE_URL } from './utils/api';
+import api from './utils/axios';
 import { Routes ,Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { HomePage } from './pages/home/HomePage';
@@ -7,17 +6,13 @@ import { CheckoutPage } from './pages/checkout/CheckoutPage';
 import { OrdersPage } from './pages/orders/OrdersPage';
 import { TrackingPage } from './pages/TrackingPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import './App.css'
-
-window.axios = axios;
+import './App.css';
 
 function App() {
   const [cart, setCart] = useState([]);
 
   const loadCart = async() => {
-      const response =  await axios.get(
-        `${API_BASE_URL}/api/cart-items?expand=product`
-      );
+      const response =  await api.get('/api/cart-items?expand=product');
         setCart(response.data);
       };
 

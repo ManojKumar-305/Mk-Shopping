@@ -1,8 +1,6 @@
-import axios from 'axios';
-import { API_BASE_URL } from '../../utils/api';
+import api from '../../utils/axios';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-// import { Helmet } from "react-helmet-async";
 import { Header } from '../../components/Header';
 import { ProductsGrid } from './productsGrid';
 import { ProductSkeleton } from './productSkeleton';
@@ -23,13 +21,15 @@ export function HomePage({ cart, loadCart }) {
         setError(null);
         setProducts([]);
 
-        const urlPath = search
-          ? `${API_BASE_URL}/api/products?search=${search}`
-          : `${API_BASE_URL}/api/products`;
+        const response = await api.get(
+          search ? `/api/products?search=${search}` : '/api/products'
+        );
 
-        const response = await axios.get(urlPath);
-        console.log('PRODUCTS RESPONSE: ', response.data);
-        setProducts(Array.isArray(response.data) ? response.data : []);
+        {products.length === 0 && (
+        <p>No products available right now.</p>
+      )}
+
+        setProducts(response.data);
       } catch {
         setError('Failed to load products. Please try again later.');
       } finally {
@@ -42,11 +42,9 @@ export function HomePage({ cart, loadCart }) {
 
   return (
     <>
-      {/* <Helmet> */}
         <title>MK Shopping</title>
         <link rel="icon" href="/public/images/home-favicon.png" />
-      {/* </Helmet> */}
-
+    
       <Header cart={cart} />
 
     <div className="home-page">
