@@ -1,0 +1,144 @@
+.ui-button {
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.ui-button--primary {
+  color: var(--text-on-primary);
+  background-color: var(--primary);
+  box-shadow: var(--shadow-soft);
+}
+
+.ui-button--secondary {
+  color: var(--text-default);
+  background-color: var(--background-default);
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-soft);
+}
+
+.ui-button--ghost {
+  color: var(--primary);
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.ui-button:hover {
+  transform: translateY(-1px);
+}
+
+.ui-button:active {
+  transform: translateY(0);
+}
+
+.ui-button--sm {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.ui-button--md {
+  padding: 0.85rem 1.25rem;
+}
+
+.ui-button--lg {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+}
+
+.ui-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ui-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ui-input {
+  width: 100%;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+  font-size: 0.95rem;
+  background-color: var(--background-default);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ui-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.ui-input--error {
+  border-color: var(--error);
+}
+
+.ui-input-error {
+  color: var(--error-strong);
+  font-size: 0.82rem;
+}
+
+.ui-card {
+  background: var(--background-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-light);
+}
+
+.ui-loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--muted);
+}
+
+.ui-loader-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(15, 23, 42, 0.15);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: ui-loader-spin 0.8s linear infinite;
+}
+
+@keyframes ui-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ui-empty-state {
+  text-align: center;
+  padding: 2rem;
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+}
+
+.ui-empty-state-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.ui-empty-state-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-default);
+}
+
+.ui-empty-state-message {
+  color: var(--muted);
+  margin-top: 0.5rem;
+}

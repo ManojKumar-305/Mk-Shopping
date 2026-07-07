@@ -1,0 +1,45 @@
+.page-title,
+.ui-empty-state-title,
+.product-name,
+.order-header-label,
+.payment-summary-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--font-family-base);
+  line-height: 1.2;
+}
+
+.page-title {
+  font-size: clamp(1.5rem, 2vw, 2.25rem);
+}
+
+p,
+label,
+small,
+.ui-empty-state-message,
+.delivery-option-price,
+.product-delivery-date,
+.product-quantity,
+.order-header-right-section {
+  color: var(--muted);
+}
+
+button,
+select,
+input,
+textarea {
+  font-size: 1rem;
+}
+
+.ui-label {
+  font-size: 0.9rem;
+}

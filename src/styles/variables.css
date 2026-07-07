@@ -1,0 +1,37 @@
+:root {
+  --font-family-base: Roboto, Arial, sans-serif;
+  --text-default: #212121;
+  --background-default: #ffffff;
+  --surface-default: #f8fafc;
+  --surface-muted: #f3f4f6;
+  --surface-lighter: #fafafa;
+  --surface-border: #f0f0f0;
+  --border-default: #cbd5e1;
+  --border-strong: #94a3b8;
+  --primary: #0b3d91;
+  --primary-hover: rgba(11, 61, 145, 0.85);
+  --primary-active: rgba(11, 61, 145, 0.7);
+  --primary-strong: #0f172a;
+  --secondary: #16a34a;
+  --accent: #618bff;
+  --accent-hover: rgba(97, 139, 255, 0.85);
+  --surface-soft: #eef2ff;
+  --secondary-soft: rgba(25, 135, 84, 0.15);
+  --text-on-primary: #ffffff;
+  --error: #dc2626;
+  --error-strong: #b91c1c;
+  --muted: #64748b;
+  --background-dark: #111827;
+  --text-dark: #e2e8f0;
+  --focus-ring: rgba(11, 61, 145, 0.08);
+  --shadow-light: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 2px 5px rgba(15, 23, 42, 0.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 5px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}
