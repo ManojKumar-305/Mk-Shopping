@@ -1,3 +1,5 @@
+import UserMenu from "./UserMenu";
+import useAuth from "../hooks/useAuth";
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useCartContext } from '../context/CartContext';
@@ -9,6 +11,7 @@ import LogoMk from '../assets/images/icons/mk-shopping-logo.svg';
 import './Header.css';
 
 export function Header() {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const searchText = searchParams.get('search');
@@ -39,8 +42,8 @@ export function Header() {
       </div>
 
       <div className="middle-section">
-        <input className="search-bar" type="text" placeholder="Search" 
-        value={search} onChange={updateSearchInput} />
+        <input className="search-bar" type="text" placeholder="Search"
+          value={search} onChange={updateSearchInput} />
 
         <button className="search-button"
           onClick={searchProducts}>
@@ -49,6 +52,7 @@ export function Header() {
       </div>
 
       <div className="right-section">
+
         <NavLink className="orders-link header-link" to="/orders">
           <span className="orders-text">Orders</span>
         </NavLink>
@@ -58,6 +62,20 @@ export function Header() {
           <div className="cart-quantity">{totalQuantity}</div>
           <div className="cart-text">Cart</div>
         </NavLink>
+
+        {isAuthenticated ? (
+          <UserMenu />
+        ) : (
+          <NavLink
+            className="orders-link header-link"
+            to="/login"
+          >
+            <span className="orders-text">
+              Sign In
+            </span>
+          </NavLink>
+        )}
+
       </div>
     </div>
   );

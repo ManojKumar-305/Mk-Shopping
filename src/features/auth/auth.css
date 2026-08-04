@@ -1,0 +1,32 @@
+.auth-page {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 32px;
+
+    background:
+        radial-gradient(circle at top right,
+            rgba(37,99,235,.08),
+            transparent 35%),
+        radial-gradient(circle at bottom left,
+            rgba(14,165,233,.08),
+            transparent 35%),
+        #f8fafc;
+}
+
+.auth-footer-text {
+    color: #6b7280;
+}
+
+.auth-footer-text a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer-text a:hover {
+    text-decoration: underline;
+}
