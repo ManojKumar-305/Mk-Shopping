@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import AuthCard from "./components/AuthCard";
+import AuthPageShell from "./components/AuthPageShell";
 import LoginForm from "./components/LoginForm";
 
 import useAuth from "../../hooks/useAuth";
-
-import "./auth.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -40,26 +38,22 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="auth-page">
-
-      <AuthCard
-        title="Welcome Back"
-        subtitle="Sign in to continue to MK Tech Store"
-        footer={
-          <p className="auth-footer-text">
-            Don't have an account?{" "}
-            <Link to="/register">
-              Create Account
-            </Link>
-          </p>
-        }
-      >
-        <LoginForm
-          onSubmit={handleLogin}
-          loading={loading}
-        />
-      </AuthCard>
-
-    </div>
+    <AuthPageShell
+      title="Welcome Back"
+      subtitle="Sign in to continue to MK Tech Store"
+      footer={
+        <p className="auth-footer-text">
+          Don't have an account?{" "}
+          <Link to="/register">
+            Create Account
+          </Link>
+        </p>
+      }
+    >
+      <LoginForm
+        onSubmit={handleLogin}
+        loading={loading}
+      />
+    </AuthPageShell>
   );
 }

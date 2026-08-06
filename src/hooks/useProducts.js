@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { fetchProducts } from '../services/products';
 
 export function useProducts(search) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const normalizedSearch = useMemo(() => search?.trim() ?? '', [search]);
 
   useEffect(() => {
     let isMounted = true;
@@ -14,11 +15,11 @@ export function useProducts(search) {
       setError(null);
 
       try {
-        const data = await fetchProducts(search);
+        const data = await fetchProducts(normalizedSearch);
         if (isMounted) {
           setProducts(data);
         }
-      } catch (error) {
+      } catch {
         if (isMounted) {
           setError('Failed to load products. Please try again later.');
         }
@@ -34,7 +35,7 @@ export function useProducts(search) {
     return () => {
       isMounted = false;
     };
-  }, [search]);
+  }, [normalizedSearch]);
 
   return { products, isLoading, error };
 }

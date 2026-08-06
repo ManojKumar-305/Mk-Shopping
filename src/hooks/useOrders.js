@@ -18,7 +18,7 @@ export function useOrders() {
         if (isMounted) {
           setOrders(data);
         }
-      } catch (error) {
+      } catch {
         if (isMounted) {
           setError('Failed to load orders. Please try again later.');
         }
@@ -56,7 +56,7 @@ export function useOrder(orderId) {
         if (isMounted) {
           setOrder(data);
         }
-      } catch (error) {
+      } catch {
         if (isMounted) {
           setError('Failed to load order. Please try again later.');
         }

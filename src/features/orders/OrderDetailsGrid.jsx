@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BuyAgainIcon from '../../assets/images/icons/buy-again.png';
 import { Button } from '../../components/ui/Button';
 import { useCartContext } from '../../context/CartContext';

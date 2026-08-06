@@ -1,13 +1,14 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 import { useCart } from '../hooks/useCart';
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
   const cartState = useCart();
+  const value = useMemo(() => cartState, [cartState.cart, cartState.isLoading, cartState.error]);
 
   return (
-    <CartContext.Provider value={cartState}>
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { Product } from './Product';
 
-export function ProductsGrid({ products = [] }) {
+const ProductsGridComponent = function ProductsGrid({ products = [] }) {
   if (!Array.isArray(products)) {
     console.error('ProductsGrid expected array, got:', products);
     return null;
@@ -24,4 +25,6 @@ export function ProductsGrid({ products = [] }) {
       ))}
     </div>
   );
-}
+};
+
+export const ProductsGrid = memo(ProductsGridComponent);

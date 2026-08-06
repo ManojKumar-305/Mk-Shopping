@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { StarRating } from '../../components/StarRating';
 import { Button } from '../../components/ui/Button';
 import { formatMoney } from '../../utils/money';
@@ -6,7 +6,7 @@ import CheckmarkIcon from '../../assets/images/icons/checkmark.png';
 import { API_BASE_URL } from '../../utils/api';
 import { useCartContext } from '../../context/CartContext';
 
-export function Product({ product }) {
+const ProductComponent = function Product({ product }) {
   const [quantity, setQuantity] = useState(1);
   const [showAddedMessage, setShowAddedMessage] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -38,6 +38,7 @@ export function Product({ product }) {
           src={`${API_BASE_URL}/${product.image}`}
           alt={product.name}
           loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -96,4 +97,13 @@ export function Product({ product }) {
 
     </div>
   );
-}
+};
+
+export const Product = memo(ProductComponent, (prevProps, nextProps) => {
+  return prevProps.product?.id === nextProps.product?.id &&
+    prevProps.product?.name === nextProps.product?.name &&
+    prevProps.product?.priceCents === nextProps.product?.priceCents &&
+    prevProps.product?.image === nextProps.product?.image &&
+    prevProps.product?.rating?.stars === nextProps.product?.rating?.stars &&
+    prevProps.product?.rating?.count === nextProps.product?.rating?.count;
+});

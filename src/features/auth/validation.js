@@ -1,20 +1,23 @@
 export const emailRegex =
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function sanitizeText(value) {
+  return String(value ?? "").trim();
+}
+
 export function validateLogin({ email, password }) {
   const errors = {};
+  const normalizedEmail = sanitizeText(email).toLowerCase();
+  const normalizedPassword = sanitizeText(password);
 
-  if (!email.trim()) {
+  if (!normalizedEmail) {
     errors.email = "Email is required";
-  } else if (!emailRegex.test(email)) {
+  } else if (!emailRegex.test(normalizedEmail)) {
     errors.email = "Enter a valid email";
   }
 
-  if (!password) {
+  if (!normalizedPassword) {
     errors.password = "Password is required";
-  } else if (password.length < 8) {
-    errors.password =
-      "Password must be at least 8 characters";
   }
 
   return errors;
@@ -23,10 +26,10 @@ export function validateLogin({ email, password }) {
 export function validateRegister(formData) {
   const errors = {};
 
-  const fullName = formData.fullName.trim();
-  const email = formData.email.trim();
-  const password = formData.password;
-  const confirmPassword = formData.confirmPassword;
+  const fullName = sanitizeText(formData.fullName);
+  const email = sanitizeText(formData.email).toLowerCase();
+  const password = sanitizeText(formData.password);
+  const confirmPassword = sanitizeText(formData.confirmPassword);
 
   if (!fullName) {
     errors.fullName = "Full name is required.";

@@ -54,16 +54,23 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function login(email, password) {
-    return await loginService(email, password);
+    const normalizedEmail = String(email ?? "").trim().toLowerCase();
+    const normalizedPassword = String(password ?? "");
+
+    return await loginService(normalizedEmail, normalizedPassword);
   }
 
   async function register(fullName, email, password) {
-  return await registerService(
-    fullName,
-    email,
-    password
-  );
-}
+    const normalizedFullName = String(fullName ?? "").trim();
+    const normalizedEmail = String(email ?? "").trim().toLowerCase();
+    const normalizedPassword = String(password ?? "");
+
+    return await registerService(
+      normalizedFullName,
+      normalizedEmail,
+      normalizedPassword
+    );
+  }
 
   async function logout() {
     return await logoutService();

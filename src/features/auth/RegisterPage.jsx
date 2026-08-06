@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import AuthCard from "./components/AuthCard";
+import AuthPageShell from "./components/AuthPageShell";
 import RegisterForm from "./components/RegisterForm";
 
 import useAuth from "../../hooks/useAuth";
-
-import "./auth.css";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -42,24 +40,22 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="auth-page">
-      <AuthCard
-        title="Create Account"
-        subtitle="Join MK Tech Store today"
-        footer={
-          <p className="auth-footer-text">
-            Already have an account?{" "}
-            <Link to="/login">
-              Sign In
-            </Link>
-          </p>
-        }
-      >
-        <RegisterForm
-          onSubmit={handleRegister}
-          loading={loading}
-        />
-      </AuthCard>
-    </div>
+    <AuthPageShell
+      title="Create Account"
+      subtitle="Join MK Tech Store today"
+      footer={
+        <p className="auth-footer-text">
+          Already have an account?{" "}
+          <Link to="/login">
+            Sign In
+          </Link>
+        </p>
+      }
+    >
+      <RegisterForm
+        onSubmit={handleRegister}
+        loading={loading}
+      />
+    </AuthPageShell>
   );
 }

@@ -1,82 +1,55 @@
 .header {
   background-color: var(--primary);
   color: white;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0 20px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
+
   height: 60px;
   z-index: 1000;
 }
 
+/* ===========================
+   LEFT SECTION
+=========================== */
+
 .header .left-section {
-  width: 208px;
   display: flex;
   align-items: center;
-}
-
-@media (max-width: 800px) {
-  .header .left-section {
-    width: unset;
-  }
+  flex-shrink: 0;
 }
 
 .header .header-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  padding: 0 9.5px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0);
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
 }
 
 .header .header-link:hover {
-  border: 1px solid white;
+  border-color: white;
 }
 
 .header .logo {
   height: 40px;
-  max-height: 40px;
   width: auto;
-  max-width: 100%;
   display: block;
-  object-fit: contain;
-}
-
-/* Constrain logo width to the left-section so search bar alignment stays perfect */
-.header .left-section .logo {
-  max-width: 208px;
 }
 
 .header .mobile-logo {
   display: none;
 }
 
-/* Search button uses Accent Mint */
-.header .search-button {
-  background-color: var(--accent);
-  border: none;
-  width: 45px;
-  height: 40px;
-  border-top-right-radius: var(--radius-xs);
-  border-bottom-right-radius: var(--radius-xs);
-  flex-shrink: 0;
-}
+@media (max-width:675px) {
 
-.header .search-button:hover {
-  background-color: var(--accent-hover);
-}
-
-
-@media (max-width: 675px) {
   .header .logo {
     display: none;
   }
@@ -84,86 +57,102 @@
   .header .mobile-logo {
     display: block;
     height: 28px;
-    margin-top: 3px;
   }
+
 }
+
+/* ===========================
+   SEARCH SECTION
+=========================== */
 
 .header .middle-section {
   flex: 1;
-  max-width: 850px;
-  margin-left: 10px;
-  margin-right: 10px;
   display: flex;
+  align-items: center;
+
+  margin: 0 25px;
+
+  min-width: 0;
 }
 
 .header .search-bar {
   flex: 1;
-  width: 0;
-  font-size: 16px;
+
   height: 40px;
-  padding-left: 15px;
+
   border: none;
+  outline: none;
+
+  padding: 0 15px;
+
+  font-size: 16px;
+
   border-top-left-radius: var(--radius-xs);
   border-bottom-left-radius: var(--radius-xs);
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  box-sizing: border-box;
 }
 
-.header .cart-quantity {
-  color: var(--primary);
-  font-size: 14px;
-  font-weight: 700;
+.header .search-button {
+  width: 50px;
+  height: 40px;
 
-  position: absolute;
-  top: 3px;
-  right: 46px;
+  border: none;
 
-  width: 26px;
-  text-align: center;
+  background: var(--accent);
+
+  border-top-right-radius: var(--radius-xs);
+  border-bottom-right-radius: var(--radius-xs);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.header .search-button:hover {
+  background: var(--accent-hover);
 }
 
 .header .search-icon {
+  width: 20px;
   height: 20px;
-  margin-left: 0px;
-  margin-top: 3px;
 }
 
+/* ===========================
+   RIGHT SECTION
+=========================== */
+
 .header .right-section {
-  width: 180px;
-  flex-shrink: 0;
   display: flex;
-  justify-content: end;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
 }
 
 .header .orders-link {
-  color: white;
-
   display: flex;
   align-items: center;
-  padding-left: 13px;
-  padding-right: 13px;
+  color: white;
 }
 
-.header .orders-link.active{
+.header .orders-link.active {
   text-decoration: underline;
 }
 
 .header .orders-text {
-  display: block;
   font-size: 15px;
   font-weight: 700;
 }
 
 .header .cart-link {
-  color: white;
   display: flex;
   align-items: center;
   position: relative;
+  color: white;
 }
 
 .header .cart-icon {
-  width: 38px;
+  width: 36px;
 }
 
 .header .cart-text {
@@ -172,8 +161,45 @@
   font-weight: 700;
 }
 
-.header .search-icon {
-  height: 20px;
-  margin-left: 0px;
-  margin-top: 3px;
+.header .cart-quantity {
+  position: absolute;
+  top: 2px;
+  right: 42px;
+
+  width: 22px;
+
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  color: var(--primary);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width:900px) {
+
+  .header .middle-section {
+    margin: 0 15px;
+  }
+
+  .header .right-section {
+    gap: 10px;
+  }
+
+}
+
+@media (max-width:650px) {
+
+  .header {
+    padding: 0 10px;
+  }
+
+  .header .middle-section {
+    margin: 0 10px;
+  }
+
 }

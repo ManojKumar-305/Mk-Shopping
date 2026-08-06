@@ -13,7 +13,7 @@ export function useCart() {
     try {
       const data = await fetchCartItems();
       setCart(data);
-    } catch (error) {
+    } catch {
       setError('Failed to load cart. Please try again.');
     } finally {
       setIsLoading(false);

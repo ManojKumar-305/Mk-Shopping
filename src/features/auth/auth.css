@@ -1,12 +1,9 @@
 .auth-page {
     min-height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
-    padding: 32px;
-
+    padding: var(--spacing-3xl);
     background:
         radial-gradient(circle at top right,
             rgba(37,99,235,.08),
@@ -14,15 +11,15 @@
         radial-gradient(circle at bottom left,
             rgba(14,165,233,.08),
             transparent 35%),
-        #f8fafc;
+        var(--surface-default);
 }
 
 .auth-footer-text {
-    color: #6b7280;
+    color: var(--muted-strong);
 }
 
 .auth-footer-text a {
-    color: #2563eb;
+    color: var(--primary);
     font-weight: 600;
     text-decoration: none;
 }
