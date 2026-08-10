@@ -47,6 +47,26 @@ export async function forgotPassword(email) {
   }
 }
 
+export async function updateProfile(fullName) {
+  const normalizedFullName = String(fullName ?? "").trim();
+
+  if (!normalizedFullName) {
+    throw new Error("Full name cannot be empty.");
+  }
+
+  const { data, error } = await supabase.auth.updateUser({
+    data: {
+      full_name: normalizedFullName,
+    },
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
 export async function getCurrentUser() {
   const {
     data: { user },
