@@ -1,12 +1,13 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { supabase } from "../lib/supabase";
 import {
   login as loginService,
   logout as logoutService,
   register as registerService,
+  updateProfile as updateProfileService,
 } from "../services/authService";
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -76,6 +77,30 @@ export function AuthProvider({ children }) {
     return await logoutService();
   }
 
+  async function updateProfile(fullName) {
+    const normalizedFullName = String(fullName ?? "").trim();
+    const result = await updateProfileService(normalizedFullName);
+
+    if (result?.user) {
+      setUser((currentUser) => {
+        if (!currentUser) {
+          return result.user;
+        }
+
+        return {
+          ...currentUser,
+          ...result.user,
+          user_metadata: {
+            ...(currentUser.user_metadata || {}),
+            ...(result.user.user_metadata || {}),
+          },
+        };
+      });
+    }
+
+    return result;
+  }
+
   const value = useMemo(
     () => ({
       user,
@@ -86,6 +111,7 @@ export function AuthProvider({ children }) {
       login,
       register,
       logout,
+      updateProfile,
     }),
     [user, session, loading]
   );
@@ -95,14 +121,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuthContext() {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error("useAuthContext must be used within an AuthProvider");
-  }
-
-  return context;
 }
