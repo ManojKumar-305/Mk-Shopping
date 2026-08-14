@@ -1,7 +1,6 @@
-# MK Shopping 🛒
+# MK Tech Store — Powering Your Digital Lifestyle
 
-MK Shopping is a fully functional Amazon-style e-commerce web application built using **React** and **Vite**.  
-The project focuses on delivering a real-world shopping experience with clean UI, reusable components, and scalable frontend architecture.
+MK Tech Store is a modern e-commerce storefront built with **React** and **Vite**. The project delivers a polished shopping experience for tech products, with responsive pages, cart and checkout flows, order tracking, and a clean component-driven frontend.
 
 ---
 
@@ -45,6 +44,7 @@ To run this project locally:
 npm install
 npm run dev
 ```
+
 http://localhost:5173
 
 

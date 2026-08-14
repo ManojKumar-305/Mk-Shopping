@@ -6,7 +6,7 @@ import { useCartContext } from '../context/CartContext';
 import CartIcon from '../assets/images/icons/cart-icon.png';
 import SearchIcon from '../assets/images/icons/search-icon.png';
 import MobileLogoWhite from '../assets/images/mobile-logo-white.png';
-import LogoMk from '../assets/images/icons/mk-shopping-logo.svg';
+import LogoMk from '../assets/images/icons/mk-tech-store-logo.svg';
 
 import './Header.css';
 
@@ -36,7 +36,7 @@ export function Header() {
     <div className="header">
       <div className="left-section">
         <NavLink to="/" className="header-link">
-          <img className="logo" src={LogoMk} alt="MK Shopping" />
+          <img className="logo" src={LogoMk} alt="MK Tech Store" />
           <img className="mobile-logo" src={MobileLogoWhite} alt="Mobile Logo" />
         </NavLink>
       </div>

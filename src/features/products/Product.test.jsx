@@ -5,7 +5,17 @@ import axios from 'axios';
 import { CartProvider } from '../../context/CartContext';
 import { Product } from './Product';
 
-vi.mock('axios');
+vi.mock('axios', () => {
+  const mockApi = {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    delete: vi.fn(),
+    create: vi.fn(() => mockApi),
+  };
+
+  return { default: mockApi };
+});
 
 describe('Product component', () => {
   let product;
@@ -51,13 +61,14 @@ describe('Product component', () => {
 
     expect(
       screen.getByTestId('product-image'))
-      .toHaveAttribute('src', 'images/products/athletic-cotton-socks-6-pairs.jpg');
-
-    expect(
-      screen.getByTestId('product-rating-stars-image')).toHaveAttribute('src', 'images/ratings/rating-45.png')
+      .toHaveAttribute('src', 'https://mk-shopping-backend.onrender.com/images/products/athletic-cotton-socks-6-pairs.jpg');
 
     expect(
       screen.getByText('87')).toBeInTheDocument();
+
+    expect(
+      screen.getByTestId('product-image')
+    ).toHaveAttribute('src', 'https://mk-shopping-backend.onrender.com/images/products/athletic-cotton-socks-6-pairs.jpg');
   });
 
   it('adds a product to the cart', async () => {

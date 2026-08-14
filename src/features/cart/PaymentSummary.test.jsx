@@ -7,7 +7,17 @@ import axios from 'axios';
 import { CartProvider } from '../../context/CartContext';
 import { PaymentSummary } from './PaymentSummary';
 
-vi.mock('axios');
+vi.mock('axios', () => {
+  const mockApi = {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    delete: vi.fn(),
+    create: vi.fn(() => mockApi),
+  };
+
+  return { default: mockApi };
+});
 
 describe('PaymentSummary component', () => {
   let paymentSummary;

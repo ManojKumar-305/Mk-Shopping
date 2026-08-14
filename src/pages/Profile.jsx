@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 import "./Profile.css";
 
 export default function Profile() {
-  const { user, updateProfile, loading } = useAuth();
+  const { user, updateProfile } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [fullName, setFullName] = useState("");
   const [isSaving, setIsSaving] = useState(false);
